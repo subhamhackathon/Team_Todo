@@ -1,0 +1,54 @@
+{
+    "esgResponse": [
+        {
+            "benchmarkDetails": [
+                {
+                    "citationDetails": "",
+                    "esgIndicators": "NetZeroTarget",
+                    "esgType": "Environment",
+                    "pageNumber": 1,
+                    "primaryDetails": "Unclear. The report mentions a goal to reduce greenhouse gas intensity by 30% by 2030, but it does not explicitly state whether there is a net zero target.",
+                    "question": "what is net zero target",
+                    "secondaryDetails": ""
+                },
+                {
+                    "citationDetails": "string",
+                    "esgIndicators": "InterimEmissionsReductionTarget",
+                    "esgType": "Environment",
+                    "pageNumber": 1,
+                    "primaryDetails": "The adopted goal for reducing greenhouse gas (GHG) intensity is 30% by 2030.",
+                    "question": "what is the interim emission reduction target",
+                    "secondaryDetails": ""
+                },
+                {
+                    "citationDetails": "",
+                    "esgIndicators": "RenewableElectricityTarget",
+                    "esgType": "Environment",
+                    "pageNumber": 1,
+                    "primaryDetails": "Unclear. The report does not mention whether or not there is a renewable electricity target.",
+                    "question": "what is the Renewable Electricity Target",
+                    "secondaryDetails": ""
+                },
+                {
+                    "citationDetails": "",
+                    "esgIndicators": "RenewableElectricityTarget",
+                    "esgType": "Environment",
+                    "pageNumber": 1,
+                    "primaryDetails": "Unclear. The report does not explicitly mention whether or not SPX Technologies has a circularity strategy and targets.",
+                    "question": "what is the Circularity Stratergy & targets",
+                    "secondaryDetails": ""
+                },
+                {
+                    "citationDetails": "",
+                    "esgIndicators": "DE&ITarget",
+                    "esgType": "Social",
+                    "pageNumber": 1,
+                    "primaryDetails": "Yes.",
+                    "question": "what is the Diversity, Equity and Inclusion target",
+                    "secondaryDetails": ""
+                }
+            ],
+            "entityName": "spx"
+        }
+    ]
+}
