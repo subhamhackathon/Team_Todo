@@ -20,9 +20,10 @@ client = AzureOpenAI(
 def getAnswersFromPDF(urls, entity): 
             print(urls)
             esgResponseList = []
-            for url in urls.split('|'):
-
-                  # Send a GET request to the URL and get the response  
+            for itemurl in urls.split('|'):
+            
+                url, entity = itemurl.split('&entity=')                
+                # Send a GET request to the URL and get the response  
                 response = requests.get(url)  
                   
                 # Read the content of the response into a BytesIO object  

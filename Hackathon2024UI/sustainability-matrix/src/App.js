@@ -53,6 +53,7 @@ function App() {
       
       //const apiUrl = `http://localhost:5000/ESGReport?pdf=https://www.spx.com/wp-content/uploads/2023/09/SPX_SustainabilityReport_2022_FINAL.pdf&entity=spx`;
       
+      // const apiUrl = `http://localhost:5000/ESGReport?pdf=${encodeURIComponent(url)}&entity=spx`;
       const apiUrl = `http://localhost:5000/ESGReport?pdf=${encodeURIComponent(url)}&entity=spx`;
       var response = await axios.get(apiUrl,{ headers }); // Change the URL to your .NET Core API endpoint
       
