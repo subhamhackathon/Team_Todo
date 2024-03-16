@@ -17,7 +17,10 @@ client = AzureOpenAI(
                 )
 
 
-def getAnswersFromPDF(url, entity): 
+def getAnswersFromPDF(urls, entity): 
+            print(urls)
+            esgResponseList = []
+            for url in urls.split('|'):
 
                   # Send a GET request to the URL and get the response  
                 response = requests.get(url)  
@@ -26,7 +29,7 @@ def getAnswersFromPDF(url, entity):
                 pdf_bytes = io.BytesIO(response.content)  
                   
                 # Create a PDF reader object from the BytesIO object  
-            #    pdf_reader = PyPDF2.PdfFileReader(pdf_bytes)  
+                # pdf_reader = PyPDF2.PdfFileReader(pdf_bytes)  
 
 
                 # creating a pdf reader object 
@@ -158,16 +161,17 @@ def getAnswersFromPDF(url, entity):
                 }
 
 
-                esgResponse = {
-                  "esgResponse": [
-                    {
-                      "entityName": entity,
-                      "benchmarkDetails": [netZeroTargetQ,emissionReductionQ,renewableElectricityQ,circularityStratergyQ,diversityQ]
-                    }
-                  ]
-                }
-                 # Return user data as JSON object  
-                return jsonify(esgResponse)
+                esgResponseList.append({
+                "entityName": entity,
+                "benchmarkDetails": [netZeroTargetQ,emissionReductionQ,renewableElectricityQ,circularityStratergyQ,diversityQ]
+                })
+
+            esgResponse = {
+                    "esgResponse": esgResponseList
+            }
+                
+            # Return user data as JSON object  
+            return jsonify(esgResponse)
 
 
 def getSecondaryAnswer(key, targetName , secondary):
