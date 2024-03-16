@@ -13,29 +13,29 @@ function EsgResponseGrid({ data }) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white', textAlign: 'center'  }}>Company</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'darkblue', color:'white' , textAlign: 'center' }}>ESG Score</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white', textAlign: 'center'  }} colSpan={4}>Environmental</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'blue', color:'white', textAlign: 'center'   }}>Social</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'yellow', color:'black' , textAlign: 'center'   }} colSpan={2}>Governance</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white', textAlign: 'center' }} colSpan={6}>Reporting</TableCell>              
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white', textAlign: 'center', fontWeight:'bold'}}>Company</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'darkblue', color:'white' , textAlign: 'center',fontWeight:'bold'}}>ESG Score</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white', textAlign: 'center',fontWeight:'bold'}} colSpan={4}>Environmental</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'blue', color:'white', textAlign: 'center',fontWeight:'bold' }}>Social</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'yellow', color:'black' , textAlign: 'center',fontWeight:'bold' }} colSpan={2}>Governance</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white', textAlign: 'center',fontWeight:'bold'}} colSpan={6}>Reporting</TableCell>              
             </TableRow>
             <TableRow>
               <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white' , textAlign: 'center'}}></TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'darkblue', color:'white', textAlign: 'center'}}>MSCI Sustainalytics</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white' , textAlign: 'center'}}>Net Zero Target</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white', textAlign: 'center'}}>Interim Emissions Reduction Target</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white', textAlign: 'center'}}>Renewable Electricity Target</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white',textAlign: 'center' }}>Circularity Strategy & Targets</TableCell> 
-              <TableCell style={{ border: '1px solid white', backgroundColor:'blue', color:'white',textAlign: 'center'}}>Diversity, Equity, and Inclusion Target</TableCell>   
-              <TableCell style={{ border: '1px solid white', backgroundColor:'yellow', color:'black',textAlign: 'center'}}>Employee Health & Safety Audits</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'yellow', color:'black',textAlign: 'center'}}>Supply Chain Audits</TableCell> 
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white', textAlign: 'center'}}>SBTi</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center'}}>CDP</TableCell>
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center'}}>GRI</TableCell> 
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center' }}>SASB</TableCell>             
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center' }}>TCFD</TableCell>  
-              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center'  }}>Assurance</TableCell>                        
+              <TableCell style={{ border: '1px solid white', backgroundColor:'darkblue', color:'white', textAlign: 'center', fontWeight:'bold'}}>MSCI Sustainalytics</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white' , textAlign: 'center', fontWeight:'bold'}}>Net Zero Target</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white', textAlign: 'center', fontWeight:'bold'}}>Interim Emissions Reduction Target</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white', textAlign: 'center', fontWeight:'bold'}}>Renewable Electricity Target</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'darkgreen', color:'white',textAlign: 'center', fontWeight:'bold' }}>Circularity Strategy & Targets</TableCell> 
+              <TableCell style={{ border: '1px solid white', backgroundColor:'blue', color:'white',textAlign: 'center', fontWeight:'bold'}}>Diversity, Equity, and Inclusion Target</TableCell>   
+              <TableCell style={{ border: '1px solid white', backgroundColor:'yellow', color:'black',textAlign: 'center', fontWeight:'bold'}}>Employee Health & Safety Audits</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'yellow', color:'black',textAlign: 'center', fontWeight:'bold'}}>Supply Chain Audits</TableCell> 
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white', textAlign: 'center', fontWeight:'bold'}}>SBTi</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center', fontWeight:'bold'}}>CDP</TableCell>
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center', fontWeight:'bold'}}>GRI</TableCell> 
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center', fontWeight:'bold' }}>SASB</TableCell>             
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center', fontWeight:'bold' }}>TCFD</TableCell>  
+              <TableCell style={{ border: '1px solid white', backgroundColor:'grey', color:'white',textAlign: 'center', fontWeight:'bold'  }}>Assurance</TableCell>                        
             </TableRow>
           </TableHead>
           <TableBody>

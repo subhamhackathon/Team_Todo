@@ -71,7 +71,7 @@ function App() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">
-            Sustainability Matrix
+          Sustainability Targets and Disclosures
           </Typography>
         </Toolbar>
       </AppBar>
@@ -85,7 +85,7 @@ function App() {
         rows={4}
         cols={50}
       /> */}
-
+      <h4>Please provide PDF url...</h4>
       <TextField
             placeholder="Enter URL here..."
             value={url}
@@ -101,6 +101,11 @@ function App() {
       <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={loading}>Generate Report</Button>
       
     </div>
+
+    <div style={{marginTop:'25px', marginLeft:'25px', marginBottom:'25px'}}>
+        <h2 style={{textAlign:'center'}}>Comparing Sustainability Targets and Disclosures in Industrial Machinery</h2>
+    </div>
+
     {loading ? (
        <div className="loader-container">
        <div className="loader-text">Loading...</div>
