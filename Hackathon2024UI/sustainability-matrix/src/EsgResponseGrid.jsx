@@ -3,8 +3,8 @@ import { Container, Table, TableBody, TableCell, TableHead, TableRow } from '@ma
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-const tick = "Yes.";
-const dot = "No.";
+const tick = "Yes";
+const dot = "No";
 
 function EsgResponseGrid({ data }) {
   return (
