@@ -195,7 +195,8 @@ def getSecondaryAnswer(key, targetName , secondary):
   return secondary_ans
 
 
-@app.route('/ESGReport')  
+@app.route('/ESGReport') 
+@cross_origin(supports_credentials=True) 
 def hello():  
   url = request.args.get('pdf', 'spx.pdf')  
   entity = request.args.get('entity', 'spx') 
