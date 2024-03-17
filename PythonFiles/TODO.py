@@ -242,7 +242,7 @@ def getAnswersFromPDF(urls, entity):
                     "question": "what is the CDP rating",
                     "esgType": "Reporting",
                     "esgIndicators": "CDP",
-                    "primaryDetails": "",
+                    "primaryDetails": getCDPRating(entity),
                     "secondaryDetails": "",
                     "citationDetails": "",
                     "pageNumber": 1
