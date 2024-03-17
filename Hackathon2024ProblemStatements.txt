@@ -70,6 +70,74 @@ These use cases demonstrate the versatility and applicability of the solution ac
 
 Components Used :  React, Python, Open AI Models LLM, Postman, Python API
 
+Process flow diagram:
+
+Certainly! Here's a simplified process flow diagram for the system described:
+
+sql
+Copy code
++-----------------------------+
+|       User Interaction      |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|   React Application UI      |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|     API Request Handler     |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|  PDF Extraction & Parsing   |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|    OpenAI LLM Integration   |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|  Website Parsing (Optional) |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|    Consolidation & Analysis |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|   JSON Response Generation  |
++-----------------------------+
+              |
+              v
++-----------------------------+
+|    Display in React UI      |
++-----------------------------+
+This flow represents the sequential steps involved in the process:
+
+User Interaction: Users interact with the React application's user interface to input PDF URLs.
+React Application UI: The input is received by the React application, where users can enter PDF URLs and initiate the report generation process.
+API Request Handler: The application sends a request to the API endpoint responsible for handling PDF extraction and analysis.
+PDF Extraction & Parsing: The API extracts text content from the provided PDFs and parses it for relevant information.
+OpenAI LLM Integration: The extracted text is passed to the OpenAI Language Model (LLM) for further analysis and interpretation.
+Website Parsing (Optional): Optionally, the system may parse websites to gather additional reporting indicators or supplementary data.
+Consolidation & Analysis: The extracted data, along with any supplementary information, is consolidated and analyzed to generate insights.
+JSON Response Generation: The analyzed data is formatted into a JSON response.
+Display in React UI: The JSON response is received by the React UI, where it is parsed and presented to the user for visualization and further analysis.
+This flow illustrates how user inputs are processed through various stages of data extraction, analysis, and presentation to provide valuable insights to the user.
+
+
+
+
+
+
+
 Future Plans: 
 Enhanced User Experience: Continuously improve the React application's user interface and functionality to provide a seamless experience for users.
 Integration with Additional Models: Explore integration with more advanced AI models or machine learning algorithms to enhance the accuracy and depth of information extraction.
