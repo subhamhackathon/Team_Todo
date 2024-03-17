@@ -1,0 +1,78 @@
+Problem Statement : To Measure the various factors concerning the ESG(Environmental. Social and Governance) for given entity(Company) and currently this is manual and is chargeable to clients. Intent is to put efforts to automate the survey benchmarking process by processing publicly available ESG reports from the respective company websites leveraging cutting edge technologies  which improves operational efficiency and time to market.
+
+Solution Statement:  We have designed an innovative solution for extracting and interpreting infomation from PDF. We have developed a React Solution which will help users to supply the PDF websites and see the ESG indicators visually on screen. We pass the PDF info to an API which is developed using Python. We are leveraging Open AI LLM Model to parse the PDF. Please find below a summary of the steps we are performing to get the desired results.
+We are doing analysis for each company in the below stages:
+1. Data extraction - Extract text from each page of PDF using PyPDF2 library.
+2. The text (of every page) is then passed to the turbo-GPT-3.5 model and we query the model for the 10 questions related to ESG indicators.
+3. The GPT model is instructed to response in a particular format. The format includes two parameters. The first parameter is a Yes/No indicator to show the presence of that ESG goal. The second parameter is the reason why the model thinks that the goal is present or absent.
+4. We collect these responses for every page of the PDF (say 40 responses of every question, if the PDF has 40 pages)
+5. We implemented a logic to consolidate the final answers for the every question. The logic goes as follows:
+1. If a question has any answer as Yes, in any page. Take the final Answer as Yes.
+2. Accumulate (concatenate) the reasons of all Yes answers in a text and pass it back to GTP-turbo-3.5 model. Ask it to consolidate and return back a final target number if present.
+6. The various ratings are extracted from the html pages of the various websites using python libraires.
+7. The entire response is then consolidated (answers and ratings) and returned to UI in JSON Format.
+8. The React UI utilizes the JSON data to show the information and parses the text to display suitable icons in the grid for various ESG indicators.
+
+
+We have developed a robust system capable of parsing complex financial reports and other business documents to extract relevant data to a given company and predict ESG scores. Extracted report can be used to compare and analyze various indices of target companies. Benchmark report is simple and concise mentioning index where company can improve for increasing their valuation
+
+This report will help companies to increase their valuation and brand equity, compare and contrast their contributions towards ESG with respect to their peers. This will also help investors to increase stake on given entity as they are adhering to regulatory and compliance and their commitment towards adapting eco-friendly, energy efficient practices.
+
+
+
+Design Approach:   
+We have developed a comprehensive solution to extract and interpret information from PDF documents, specifically focusing on Environmental, Social, and Governance (ESG) indicators. Our solution integrates a React frontend interface with a Python backend API powered by OpenAI's LLM Model. Here's an overview of our approach:
+
+Data Extraction: We utilize the PyPDF2 library to extract text from each page of the PDF document.
+
+Text Processing with GPT-3.5 Model: The extracted text from each page is then passed to the turbo-GPT-3.5 model to query for 10 predefined questions related to ESG indicators. These questions are designed to determine the presence of specific ESG goals within the document.
+
+Response Format: The GPT model is instructed to respond with a Yes/No indicator indicating the presence of each ESG goal, along with a reason supporting its decision.
+
+Consolidation of Responses: We collect and consolidate responses for every question across all pages of the PDF document. If any page yields a positive response (Yes), we consider the final answer as Yes for that question.
+
+Secondary Analysis: For questions with affirmative responses, we concatenate the reasons provided across all pages and pass them back to the GPT-turbo-3.5 model. We ask it to further consolidate the information and return a final target number if applicable.
+
+Extraction of Ratings: Additional ratings and data are extracted from HTML pages of various websites using Python libraries.
+
+Consolidation and Response Formatting: The entire response, including answers and ratings, is consolidated and formatted into JSON format.
+
+Presentation in React UI: The React frontend utilizes the JSON data to display the information visually. It parses the text to display suitable icons in a grid format for various ESG indicators, providing users with an intuitive interface to interpret and analyze the ESG information.
+
+In summary, our solution offers a seamless integration of text extraction, AI-driven analysis, data consolidation, and visual presentation, enabling users to easily access and understand ESG indicators from PDF documents.
+
+Use Cases:Corporate Sustainability Reporting: Companies can use the solution to automate the extraction and analysis of ESG indicators from their sustainability reports. This helps in streamlining the reporting process and ensures compliance with ESG standards and regulations.
+
+Investment Analysis: Investment firms and financial analysts can utilize the solution to quickly assess the ESG performance of companies they are considering for investment. This enables them to make informed investment decisions aligned with their ESG criteria.
+
+ESG Research and Benchmarking: Researchers and analysts can leverage the solution to conduct comprehensive ESG research across multiple companies or industries. They can benchmark companies' ESG performance against industry standards and identify areas for improvement.
+
+Regulatory Compliance: Organizations can use the solution to ensure compliance with ESG-related regulations and reporting requirements mandated by regulatory bodies. This includes fulfilling disclosure obligations and providing transparent ESG data to stakeholders.
+
+ESG Integration in Supply Chain Management: Companies can integrate ESG considerations into their supply chain management processes by analyzing ESG indicators from supplier sustainability reports. This helps in assessing the sustainability practices of suppliers and promoting responsible sourcing.
+
+ESG Performance Monitoring: Organizations can use the solution for ongoing monitoring of their ESG performance over time. By analyzing trends and changes in ESG indicators, they can track progress, identify areas of strength, and address weaknesses proactively.
+
+ESG Due Diligence: Mergers and acquisitions (M&A) teams can incorporate ESG due diligence into their assessment process when evaluating potential targets. The solution enables them to assess the ESG risks and opportunities associated with a target company, contributing to informed decision-making.
+
+ESG Education and Awareness: Educational institutions and non-profit organizations can use the solution to raise awareness and educate stakeholders about ESG issues. They can analyze ESG data from various sources and create educational materials or reports to promote sustainability literacy.
+
+These use cases demonstrate the versatility and applicability of the solution across different industries and sectors, highlighting its potential to drive positive change towards sustainability and responsible business practices.
+
+1. Users initiate the React application.
+2. In the designated "Please Provide URL" field, users input the URL of the PDF document containing the sustainability report. For example: https://www.spx.com/wp-content/uploads/2023/09/SPX_SustainabilityReport_2022_FINAL.pdf&entity=spx
+3. Users trigger the "Generate Report" function.
+4. The application interacts with the API, which in turn communicates with the OpenAI LLM Model to extract pertinent information from the provided PDF.
+5. Additionally, the application parses relevant websites to gather essential reporting indicators.
+6. The extracted data, formatted as JSON, is presented in the user interface for easy access and analysis.
+
+
+
+Components Used :  React, Python, Open AI Models LLM, Postman, Python API
+
+Future Plans: 
+Enhanced User Experience: Continuously improve the React application's user interface and functionality to provide a seamless experience for users.
+Integration with Additional Models: Explore integration with more advanced AI models or machine learning algorithms to enhance the accuracy and depth of information extraction.
+Expansion of Supported Documents: Extend support to a broader range of document formats beyond PDF, such as Word documents or HTML files, to cater to diverse user needs.
+Real-time Reporting: Implement real-time reporting features to provide instant insights and updates to users.
+Integration with External APIs: Integrate with external APIs and databases to enrich the extracted data with supplementary information and insights.
