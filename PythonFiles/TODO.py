@@ -40,7 +40,8 @@ def getAnswersFromPDF(urls, entity):
 
                 
 
-                expr = re.compile("[0-5]?\\. (.*?) (.*)")
+                #expr = re.compile("[0-5]?\\. (.*?) (.*)")
+                expr = re.compile(".?.?\\. (.*?) (.*)")
 
                 primary={}
                 secondary={}
