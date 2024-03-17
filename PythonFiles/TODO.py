@@ -1,3 +1,4 @@
+
 # importing required modules 
 from PyPDF2 import PdfReader 
 from openai import AzureOpenAI
@@ -6,8 +7,10 @@ from flask_cors import CORS, cross_origin
 import requests
 import io
 import re
+from bs4 import BeautifulSoup
   
 app = Flask(__name__)  
+
 CORS(app, support_credentials=True)
 
 client = AzureOpenAI(
@@ -17,20 +20,16 @@ client = AzureOpenAI(
                 )
 
 
-def getAnswersFromPDF(urls, entity): 
-            print(urls)
-            esgResponseList = []
-            for itemurl in urls.split('|'):
-            
-                url, entity = itemurl.split('&entity=')                
-                # Send a GET request to the URL and get the response  
+def getAnswersFromPDF(url, entity): 
+
+                  # Send a GET request to the URL and get the response  
                 response = requests.get(url)  
                   
                 # Read the content of the response into a BytesIO object  
                 pdf_bytes = io.BytesIO(response.content)  
                   
                 # Create a PDF reader object from the BytesIO object  
-                # pdf_reader = PyPDF2.PdfFileReader(pdf_bytes)  
+            #    pdf_reader = PyPDF2.PdfFileReader(pdf_bytes)  
 
 
                 # creating a pdf reader object 
@@ -63,6 +62,11 @@ def getAnswersFromPDF(urls, entity):
                       3. Is there an adopted goal for reducing emission intensity mentioned in the text? give response only in the format Yes/No(Reason)? \
                       4. Is there a Renewable Electricity Target mentioned in the text? give response only in the format Yes/No(Reason)? \
                       5. Is there a Circularity Stratergy & targets mentioned in the text? give response only in the format Yes/No(Reason)? \
+                      6. Is there a employee health and Safety audit target mentioned in the text? give response only in the format Yes/No(Reason)? \
+                      7. Is there a supply audit target mentioned in the text? give response only in the format Yes/No(Reason)? \
+                      8. Is there a GRI rating mentioned in the text? give response only in the format Yes/No(Reason)? \
+                      9. Is there a SASB rating mentioned in the text? give response only in the format Yes/No(Reason)? \
+                      10. Is there a ESG assurance rating mentioned in the text? give response only in the format Yes/No(Reason)? \
                       "
                       }
                   ]
@@ -161,18 +165,108 @@ def getAnswersFromPDF(urls, entity):
                     "pageNumber": 1
                 }
 
+                healthAndSafetyTargetQ = {
+                    "question": "what is the employee health and Safety audit target",
+                    "esgType": "Goverance",
+                    "esgIndicators": "HealthAndSafetyTarget",
+                    "primaryDetails": primary["6"] if "6" in primary else "No",
+                    "secondaryDetails": getSecondaryAnswer("6"," Employee Health and Safety audit ",secondary),
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
 
-                esgResponseList.append({
-                "entityName": entity,
-                "benchmarkDetails": [netZeroTargetQ,emissionReductionQ,renewableElectricityQ,circularityStratergyQ,diversityQ]
-                })
+                supplyAuditTargetQ = {
+                    "question": "what is supply audit target",
+                    "esgType": "Goverance",
+                    "esgIndicators": "SupplyAuditTarget",
+                    "primaryDetails": primary["7"] if "7" in primary else "No",
+                    "secondaryDetails": getSecondaryAnswer("7"," Supply Audit ",secondary),
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
 
-            esgResponse = {
-                    "esgResponse": esgResponseList
-            }
-                
-            # Return user data as JSON object  
-            return jsonify(esgResponse)
+                griRatingQ = {
+                    "question": "what is the GRI rating",
+                    "esgType": "Reporting",
+                    "esgIndicators": "GRI",
+                    "primaryDetails": primary["8"] if "8" in primary else "No",
+                    "secondaryDetails": getSecondaryAnswer("8"," GRI rating ",secondary),
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
+
+                sasbRatingQ = {
+                    "question": "what is the SASB rating",
+                    "esgType": "Reporting",
+                    "esgIndicators": "SASB",
+                    "primaryDetails": primary["9"] if "9" in primary else "No",
+                    "secondaryDetails": getSecondaryAnswer("9"," SASB Rating ",secondary),
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
+
+                esgAssuranceQ = {
+                    "question": "is the entity focussing on ESG assurance",
+                    "esgType": "Reporting",
+                    "esgIndicators": "Assurance",
+                    "primaryDetails": primary["10"] if "10" in primary else "No",
+                    "secondaryDetails": getSecondaryAnswer("10"," ESG Assurance ",secondary),
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
+
+                esgRiskRatingMSCIQ = {
+                    "question": "ESG Risk Rating for MSCI",
+                    "esgType": "ESGScore",
+                    "esgIndicators": "MSCISustainalytics",
+                    "primaryDetails": getESGRating('https://www.sustainalytics.com/esg-rating/nordson-corp/1008021860'),
+                    "secondaryDetails": "",
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
+
+                sbtIQ = {
+                    "question": "what is the SBTi rating",
+                    "esgType": "Reporting",
+                    "esgIndicators": "SBTi",
+                    "primaryDetails": "",
+                    "secondaryDetails": "",
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
+
+                cDPQ = {
+                    "question": "what is the CDP rating",
+                    "esgType": "Reporting",
+                    "esgIndicators": "CDP",
+                    "primaryDetails": "",
+                    "secondaryDetails": "",
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
+
+                tCFDQ = {
+                    "question": "what is the TCFD rating",
+                    "esgType": "Reporting",
+                    "esgIndicators": "TCFD",
+                    "primaryDetails": "",
+                    "secondaryDetails": "",
+                    "citationDetails": "",
+                    "pageNumber": 1
+                }
+
+
+
+                esgResponse = {
+                  "esgResponse": [
+                    {
+                      "entityName": entity,
+                      "benchmarkDetails": [netZeroTargetQ,emissionReductionQ,renewableElectricityQ,circularityStratergyQ,diversityQ,healthAndSafetyTargetQ,supplyAuditTargetQ,griRatingQ,sasbRatingQ,esgAssuranceQ,esgRiskRatingMSCIQ,sbtIQ,cDPQ,tCFDQ]
+                    }
+                  ]
+                }
+                 # Return user data as JSON object  
+                return jsonify(esgResponse)
 
 
 def getSecondaryAnswer(key, targetName , secondary):
@@ -200,8 +294,43 @@ def getSecondaryAnswer(key, targetName , secondary):
   return secondary_ans
 
 
-@app.route('/ESGReport') 
-@cross_origin(supports_credentials=True) 
+def getESGRating(url):
+  # Send a GET request to the URL
+  response = requests.get(url)
+
+  # Parse the HTML content
+  soup = BeautifulSoup(response.text, 'html.parser')
+
+  # Find the <div> element with class "row company-details"
+  company_details_div = soup.find('div', class_='row company-details')
+
+  # Check if the company details div is found
+  if company_details_div:
+      # Find the <div> element with class "col-6 risk-rating-score" within the company details div
+      risk_rating_div = company_details_div.find('div', class_='col-6 risk-rating-score')
+
+      # Check if the risk rating div is found
+      if risk_rating_div:
+          # Find the <span> element within the risk rating div
+          risk_rating_span = risk_rating_div.find('span', class_='')
+
+          # Check if the span element is found
+          if risk_rating_span:
+              # Extract the text content from the span element
+              risk_rating = risk_rating_span.text.strip()
+              print("Risk Rating Score:", risk_rating)
+          else:
+              print("No span element found within the risk rating div.")
+      else:
+          print("No div element with class 'col-6 risk-rating-score' found within the company details div.")
+  else:
+      print("No div element with class 'row company-details' found on the page.")
+  return risk_rating
+
+
+
+@app.route('/ESGReport')  
+@cross_origin(supports_credentials=True)
 def hello():  
   url = request.args.get('pdf', 'spx.pdf')  
   entity = request.args.get('entity', 'spx') 
