@@ -1,4 +1,3 @@
-
 # importing required modules 
 from PyPDF2 import PdfReader 
 from openai import AzureOpenAI
@@ -223,7 +222,7 @@ def getAnswersFromPDF(urls, entity):
                     "question": "ESG Risk Rating for MSCI",
                     "esgType": "ESGScore",
                     "esgIndicators": "MSCISustainalytics",
-                    "primaryDetails": getESGRating('https://www.sustainalytics.com/esg-rating/nordson-corp/1008021860'),
+                    "primaryDetails": getESGRating(entity),
                     "secondaryDetails": "",
                     "citationDetails": "",
                     "pageNumber": 1
@@ -297,9 +296,10 @@ def getSecondaryAnswer(key, targetName , secondary):
   return secondary_ans
 
 
-def getESGRating(url):
+def getESGRating(entity):
+  Esg_entity={"graco" : 'https://www.sustainalytics.com/esg-rating/graco-inc/1007907359',"nordson" :'https://www.sustainalytics.com/esg-rating/nordson-corp/1008021860',"spx":'https://www.sustainalytics.com/esg-rating/spx-technologies-inc/2012243037'}
   # Send a GET request to the URL
-  response = requests.get(url)
+  response = requests.get(Esg_entity[entity])
 
   # Parse the HTML content
   soup = BeautifulSoup(response.text, 'html.parser')
@@ -320,16 +320,50 @@ def getESGRating(url):
           # Check if the span element is found
           if risk_rating_span:
               # Extract the text content from the span element
-              risk_rating = risk_rating_span.text.strip()
-              print("Risk Rating Score:", risk_rating)
+              ESG_rating = risk_rating_span.text.strip()
+              print("Risk Rating Score:", ESG_rating)
           else:
               print("No span element found within the risk rating div.")
       else:
           print("No div element with class 'col-6 risk-rating-score' found within the company details div.")
   else:
       print("No div element with class 'row company-details' found on the page.")
-  return risk_rating
+  return ESG_rating
+  
+def getCDPRating(entity):
+  CDP_entity={"graco" : 'https://www.cdp.net/en/responses?queries%5Bname%5D=graco',"nordson" :'https://www.cdp.net/en/responses?queries%5Bname%5D=Nordson',"spx":'https://www.cdp.net/en/responses/828001/SPX-Technologies-Inc?back_to=https%3A%2F%2Fwww.cdp.net%2Fen%2Fresponses%3Fqueries%255Bname%255D%3Dspx&queries%5Bname%5D=spx'}
+  # Send a GET request to the URL
+  response = requests.get(CDP_entity[entity])
 
+  # Parse the HTML content
+  sou# Parse the HTML content
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Find all <div> elements with class "investor-program__score_link"
+score_link_divs = soup.find_all('div', class_='investor-program__score_link')
+
+# Flag to keep track if the score is found
+score_found = False
+# Iterate over each score link div
+for score_link_div in score_link_divs:
+    # Check if the score link div contains the specific score band div
+    score_band_div = score_link_div.find('div', class_='investor-program_score_band_single tooltip-top investor-program_score_band--climate-change')
+    if score_band_div:
+        # Find the parent <td> element containing the score band div
+        parent_td = score_band_div.find_parent('td', class_='search_results__response_score_band')
+        if parent_td:
+            # Extract the text content from the parent <td> element
+            score = parent_td.text.strip()
+            print("Climate Change Score:", score)
+            # Set flag to True to indicate score is found
+            score_found = True
+            # Break out of the loop once the score is found
+            break
+
+# If no score is found, print a message
+if not score_found:
+    print("No climate change score found on the page.")
+  return score
 
 
 @app.route('/ESGReport')  
