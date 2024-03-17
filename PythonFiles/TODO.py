@@ -78,7 +78,7 @@ def getAnswersFromPDF(urls, entity):
                   completion = client.chat.completions.create(
                     model="test-aj", # model = "deployment_name"
                     messages = message_text,
-                    temperature=0.4,
+                    temperature=0.71,
                     max_tokens=800,
                     top_p=0.95,
                     frequency_penalty=0,
@@ -232,7 +232,7 @@ def getAnswersFromPDF(urls, entity):
                     "question": "what is the SBTi rating",
                     "esgType": "Reporting",
                     "esgIndicators": "SBTi",
-                    "primaryDetails": "",
+                    "primaryDetails": "No",
                     "secondaryDetails": "",
                     "citationDetails": "",
                     "pageNumber": 1
@@ -331,39 +331,37 @@ def getESGRating(entity):
   return ESG_rating
   
 def getCDPRating(entity):
-  CDP_entity={"graco" : 'https://www.cdp.net/en/responses?queries%5Bname%5D=graco',"nordson" :'https://www.cdp.net/en/responses?queries%5Bname%5D=Nordson',"spx":'https://www.cdp.net/en/responses/828001/SPX-Technologies-Inc?back_to=https%3A%2F%2Fwww.cdp.net%2Fen%2Fresponses%3Fqueries%255Bname%255D%3Dspx&queries%5Bname%5D=spx'}
-  # Send a GET request to the URL
-  response = requests.get(CDP_entity[entity])
+    CDP_entity={"graco" : 'https://www.cdp.net/en/responses?queries%5Bname%5D=graco',"nordson" :'https://www.cdp.net/en/responses?queries%5Bname%5D=Nordson',"spx":'https://www.cdp.net/en/responses/828001/SPX-Technologies-Inc?back_to=https%3A%2F%2Fwww.cdp.net%2Fen%2Fresponses%3Fqueries%255Bname%255D%3Dspx&queries%5Bname%5D=spx'}
+    # Send a GET request to the URL
+    response = requests.get(CDP_entity[entity])
 
-  # Parse the HTML content
-  sou# Parse the HTML content
-soup = BeautifulSoup(response.text, 'html.parser')
+    # Parse the HTML content
+    # Parse the HTML content
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-# Find all <div> elements with class "investor-program__score_link"
-score_link_divs = soup.find_all('div', class_='investor-program__score_link')
+    # Find all <div> elements with class "investor-program__score_link"
+    score_link_divs = soup.find_all('div', class_='investor-program__score_link')
 
-# Flag to keep track if the score is found
-score_found = False
-# Iterate over each score link div
-for score_link_div in score_link_divs:
-    # Check if the score link div contains the specific score band div
-    score_band_div = score_link_div.find('div', class_='investor-program_score_band_single tooltip-top investor-program_score_band--climate-change')
-    if score_band_div:
-        # Find the parent <td> element containing the score band div
-        parent_td = score_band_div.find_parent('td', class_='search_results__response_score_band')
-        if parent_td:
-            # Extract the text content from the parent <td> element
-            score = parent_td.text.strip()
-            print("Climate Change Score:", score)
-            # Set flag to True to indicate score is found
-            score_found = True
-            # Break out of the loop once the score is found
-            break
-
-# If no score is found, print a message
-if not score_found:
-    print("No climate change score found on the page.")
-  return score
+    # Flag to keep track if the score is found
+    score_found = False
+    # Iterate over each score link div
+    for score_link_div in score_link_divs:
+        # Check if the score link div contains the specific score band div
+        score_band_div = score_link_div.find('div', class_='investor-program__score_band_single tooltip-top investor-program__score_band--climate-change')
+        if score_band_div:
+            # Find the parent <td> element containing the score band div
+            parent_td = score_band_div.find_parent('td', class_='search_results__response_score_band')
+            if parent_td:
+                # Extract the text content from the parent <td> element
+                score = parent_td.text.strip()
+                print("Climate Change Score:", score)
+                # Set flag to True to indicate score is found
+                score_found = True
+                # Break out of the loop once the score is found
+                return score
+                break
+            else:
+                return "No"
 
 
 @app.route('/ESGReport')  
