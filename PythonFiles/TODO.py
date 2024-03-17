@@ -20,16 +20,20 @@ client = AzureOpenAI(
                 )
 
 
-def getAnswersFromPDF(url, entity): 
-
-                  # Send a GET request to the URL and get the response  
+def getAnswersFromPDF(urls, entity): 
+            
+            esgResponseList = []
+            for itemurl in urls.split('|'):
+            
+                url, entity = itemurl.split('&entity=')   
+                # Send a GET request to the URL and get the response  
                 response = requests.get(url)  
                   
                 # Read the content of the response into a BytesIO object  
                 pdf_bytes = io.BytesIO(response.content)  
                   
                 # Create a PDF reader object from the BytesIO object  
-            #    pdf_reader = PyPDF2.PdfFileReader(pdf_bytes)  
+                # pdf_reader = PyPDF2.PdfFileReader(pdf_bytes)  
 
 
                 # creating a pdf reader object 
@@ -255,18 +259,17 @@ def getAnswersFromPDF(url, entity):
                     "pageNumber": 1
                 }
 
+                esgResponseList.append({
+                "entityName": entity,
+                "benchmarkDetails": [netZeroTargetQ,emissionReductionQ,renewableElectricityQ,circularityStratergyQ,diversityQ,healthAndSafetyTargetQ,supplyAuditTargetQ,griRatingQ,sasbRatingQ,esgAssuranceQ,esgRiskRatingMSCIQ,sbtIQ,cDPQ,tCFDQ]
+                })
 
-
-                esgResponse = {
-                  "esgResponse": [
-                    {
-                      "entityName": entity,
-                      "benchmarkDetails": [netZeroTargetQ,emissionReductionQ,renewableElectricityQ,circularityStratergyQ,diversityQ,healthAndSafetyTargetQ,supplyAuditTargetQ,griRatingQ,sasbRatingQ,esgAssuranceQ,esgRiskRatingMSCIQ,sbtIQ,cDPQ,tCFDQ]
-                    }
-                  ]
-                }
-                 # Return user data as JSON object  
-                return jsonify(esgResponse)
+            esgResponse = {
+                    "esgResponse": esgResponseList
+            }
+            
+            # Return user data as JSON object  
+            return jsonify(esgResponse)
 
 
 def getSecondaryAnswer(key, targetName , secondary):
