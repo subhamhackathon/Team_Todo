@@ -1,0 +1,3 @@
+React Link :  http://localhost:3000/
+
+Postman Links:   http://localhost:5000/ESGReport?pdf=https://www.spx.com/wp-content/uploads/2023/09/SPX_SustainabilityReport_2022_FINAL.pdf%26entity=spx|https://www.graco.com/content/dam/graco/corporate/literature/misc/Graco-ESG-Report.pdf%26entity=graco
